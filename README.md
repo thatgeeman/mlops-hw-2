@@ -94,6 +94,19 @@ docker compose up -d
 # `pull` is split out from `up` so any registry / network failures surface
 # explicitly instead of being buried in startup output.
 
+# --- If using podman instead of Docker ---
+# On Linux, podman requires fully-qualified image names by default. Create a
+# user-level registry config so short names resolve to Docker Hub:
+#   mkdir -p ~/.config/containers
+#   echo 'unqualified-search-registries = ["docker.io"]' > ~/.config/containers/registries.conf
+#
+# Install podman-compose, then start services in order (podman-compose has
+# trouble resolving health-check dependencies in one shot):
+#   pip install podman-compose
+#   podman-compose up -d postgres minio   # wait ~15 s for health checks
+#   podman-compose up minio-setup         # runs once and exits
+#   podman-compose up -d mlflow prometheus grafana
+
 # 4. Install Python deps (use a virtualenv)
 python -m venv .venv
 # Activate it:

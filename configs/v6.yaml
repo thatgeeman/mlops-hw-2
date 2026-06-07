@@ -1,0 +1,18 @@
+display_name: "Sandwich with larger main model (70B)"
+description: "Sandwich guardrail (input classifier + output validator) with Llama-3.3-70B as the main assistant. Hypothesis: larger model improves travel accuracy and reduces jailbreak leakage vs v5's Nemotron-30B."
+model:
+  name: meta-llama/Llama-3.3-70B-Instruct
+  temperature: 0.0
+system_prompt: prompts/v2_explicit_refusal.txt
+guardrail:
+  type: sandwich
+  input_classifier:
+    model:
+      name: nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B
+      temperature: 0.0
+    prompt: prompts/classifier_input.txt
+  output_validator:
+    model:
+      name: nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B
+      temperature: 0.0
+    prompt: prompts/classifier_output.txt

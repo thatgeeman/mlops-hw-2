@@ -16,6 +16,7 @@ dependencies = [
     "httpx>=0.27",
     "tenacity>=9.0",
     "numpy>=1.26",
+    "podman-compose>=1.6.0",
 ]
 
 [project.optional-dependencies]
